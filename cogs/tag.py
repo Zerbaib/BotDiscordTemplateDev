@@ -9,7 +9,7 @@ class Tag(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print(f'Loaded Cog Tags')
+        print('Loaded Cog Tags')
 
     # Tag view command 
     @commands.slash_command(name="tag", description="View a tag")

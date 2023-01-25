@@ -16,7 +16,7 @@ class Radio(commands.Cog):
         
     @commands.Cog.listener()
     async def on_ready(self):
-        print(f'Loaded Cog Radio')
+        print('Loaded Cog Radio')
         
     # Deafen + play/pause
     @commands.Cog.listener()
@@ -28,15 +28,15 @@ class Radio(commands.Cog):
         else:
             channel = self.bot.get_channel(after.channel.id)
         voice_client = channel.guild.voice_client
-        
+
         if voice_client and voice_client.channel.id == channel.id:
             users_in_channel = [m for m in channel.members if not m.bot]
-            if not users_in_channel:
-                if voice_client.is_playing():
-                    voice_client.pause()
-            else:
+            if users_in_channel:
                 if voice_client.is_paused():
                     voice_client.resume()
+
+            elif voice_client.is_playing():
+                voice_client.pause()
 
                     
     @commands.slash_command()
@@ -90,15 +90,12 @@ class Radio(commands.Cog):
             voice_client = inter.guild.voice_client
             if voice_client is None:
                 embed = disnake.Embed(title="Radio | Disconnect", description="```I am not currently connected to any voice channels.```", color=disnake.Color.red())
-                embed.set_footer(text=f"Requested by {inter.author}", icon_url=inter.author.avatar.url)
-                embed.set_thumbnail(url=inter.guild.me.avatar.url)
-                await inter.send(embed=embed)
             else:
                 await voice_client.disconnect()
                 embed = disnake.Embed(title="Radio | Disconnect", description="```I have successfully disconnected from the voice channel.```", color=disnake.Color.green())
-                embed.set_footer(text=f"Requested by {inter.author}", icon_url=inter.author.avatar.url)
-                embed.set_thumbnail(url=inter.guild.me.avatar.url)
-                await inter.send(embed=embed)
+            embed.set_footer(text=f"Requested by {inter.author}", icon_url=inter.author.avatar.url)
+            embed.set_thumbnail(url=inter.guild.me.avatar.url)
+            await inter.send(embed=embed)
         except Exception as e:
             print(f'Error sending disconnect command: {e}')
 

@@ -19,7 +19,7 @@ class help(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print(f'Loaded Cog Help')
+        print('Loaded Cog Help')
 
     # Help Command with subcommands 
     @commands.slash_command()
@@ -28,7 +28,26 @@ class help(commands.Cog):
         action: str = commands.Param(choices=["general", "fun", 'tickets', 'radio']),
     ):
         try:
-            if action == "general":
+            if action == "fun":
+                embedVar = disnake.Embed(
+                    title="Fun Commands!",
+                    description="Check important commands, that you can use!",
+                    colour=config.Success())
+                embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
+                embedVar.add_field(name="Fun Commands",
+                                    value=
+                                    "```/dice - Role a dice, get a number from 1-6```" +
+                                    "```/8ball - Ask a question, get an \"Honest\" response```" +
+                                    "```/coinflip - Flip a coin, see what side it lands on!```" +
+                                    "```/generate - Generate an image from a text!```" +
+                                    "```/bitcoin - Check the current price of BitCoin```",
+                                    inline=False)
+                embedVar.set_thumbnail(
+                    url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
+                )
+                await inter.response.send_message(embed=embedVar)
+
+            elif action == "general":
                 embedVar = disnake.Embed(
                     title="General Commands!",
                     description="Check important commands, that you can use!",
@@ -50,26 +69,22 @@ class help(commands.Cog):
                 )
                 await inter.response.send_message(embed=embedVar)
 
-            if action == "fun":
+            elif action == "radio":
                 embedVar = disnake.Embed(
-                    title="Fun Commands!",
+                    title="Radio Commands!",
                     description="Check important commands, that you can use!",
                     colour=config.Success())
                 embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
-                embedVar.add_field(name="Fun Commands",
+                embedVar.add_field(name="Radio Commands",
                                     value=
-                                    "```/dice - Role a dice, get a number from 1-6```" +
-                                    "```/8ball - Ask a question, get an \"Honest\" response```" +
-                                    "```/coinflip - Flip a coin, see what side it lands on!```" +
-                                    "```/generate - Generate an image from a text!```" +
-                                    "```/bitcoin - Check the current price of BitCoin```",
+                                    "```/radio - Start a radio station```" +
+                                    "```/disconnect - Stop a radio station```",
                                     inline=False)
                 embedVar.set_thumbnail(
                     url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
                 )
                 await inter.response.send_message(embed=embedVar)
-
-            if action == "tickets":
+            elif action == "tickets":
                 embedVar = disnake.Embed(
                     title="Ticket Commands!",
                     description="Check important commands, that you can use!",
@@ -82,21 +97,6 @@ class help(commands.Cog):
                                     "```/add - Add a user to a ticket```" +
                                     "```/remove - Remove a user from the ticket```" +
                                     "```/list - List Pople and roles in a ticket```",
-                                    inline=False)
-                embedVar.set_thumbnail(
-                    url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
-                )
-                await inter.response.send_message(embed=embedVar)
-            if action == "radio":
-                embedVar = disnake.Embed(
-                    title="Radio Commands!",
-                    description="Check important commands, that you can use!",
-                    colour=config.Success())
-                embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
-                embedVar.add_field(name="Radio Commands",
-                                    value=
-                                    "```/radio - Start a radio station```" +
-                                    "```/disconnect - Stop a radio station```",
                                     inline=False)
                 embedVar.set_thumbnail(
                     url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
