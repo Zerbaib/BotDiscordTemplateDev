@@ -34,17 +34,17 @@ class Music(commands.Cog):
 
     @commands.slash_command(name="pause", description="Pauses the currently playing song.")
     async def pause(self, ctx):
-        voice_client = ctx.author.voice.channel.voice_client
+        voice_channel = ctx.author.voice.channel
+        if voice_channel is None:
+            return await ctx.send("You need to be in a voice channel to use this command.")
 
-        if not voice_client:
-            await ctx.send("Not connected to a voice channel.")
-            return
+        vc = await voice_channel()
 
-        if not voice_client.is_playing():
+        if not vc.is_playing():
             await ctx.send("Nothing playing.")
             return 
 
-        voice_client.pause()
+        vc.pause()
         await ctx.send("Paused the music.")
 
 
