@@ -29,7 +29,7 @@ class Music(commands.Cog):
             filename = info.get('url', None)
 
         source = disnake.PCMVolumeTransformer(disnake.FFmpegPCMAudio(filename))
-        ctx.vc.play(source)
+        vc.play(source)
         await ctx.send(f"Playing: {title}")
 
     @commands.slash_command(name="pause", description="Pauses the currently playing song.")
