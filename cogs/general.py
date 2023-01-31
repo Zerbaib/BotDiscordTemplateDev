@@ -126,7 +126,22 @@ class general(commands.Cog):
         except Exception as e:
             print(f'Error sending invite message: {e}')
             await inter.send(embed=errors.create_error_embed(f"Error sending invite command: {e}"))
-        
+    
+    @commands.slash_command(name="setchannel", description="Set Welcome/Goodbye and log channel")
+    async def setchannel(self, inter, action: str = commands.Param(choices=["join/leave", "logging"])):
+        try:
+            if action == "join/leave":
+                with open('./join.json') as channel_file:
+                    data = json.load(channel_file)
+                await inter.channel.send("aaa")
+            if action == "logging":
+                with open('./channel.json') as channel_file:
+                    data = json.load(channel_file)
+                await inter.channel.send("aaa")
+        except Exception as e:
+            print(f'Error sending setchannel message: {e}')
+            await inter.send(embed=errors.create_error_embed(f"Error sending setchannel command: {e}"))
+
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.content.startswith("hey"):
