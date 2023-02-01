@@ -22,7 +22,7 @@ class tickets(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print(f'Loaded Cog Tickets')
+        print('Loaded Cog Tickets')
 
     # Slash command for tickets which has options of opening a ticket, closing a ticket, and deleting a ticket
 
@@ -37,9 +37,10 @@ class tickets(commands.Cog):
             # If the user selects open, it will create a ticket
             if action == "open":
                 if inter.author.id in self.tickets:
-                    _channel: disnake.TextChannel = disnake.utils.get(
-                        inter.guild.text_channels, name=f"ticket-{inter.author.name}")
-                    if _channel:
+                    if _channel := disnake.utils.get(
+                        inter.guild.text_channels,
+                        name=f"ticket-{inter.author.name}",
+                    ):
                         embed = disnake.Embed(description=f"You already have a ticket opened. {_channel.mention}")
                     else:
                         embed = disnake.Embed(description="You already have a ticket opened.")
@@ -48,7 +49,7 @@ class tickets(commands.Cog):
                 # Creates a ticket category if it doesn't exist
                 if not disnake.utils.get(inter.guild.categories, name="Tickets"):
                     await inter.guild.create_category("Tickets")
-                    
+
                 # Creates the ticket channel
                 channel = await inter.guild.create_text_channel(
                     name=f"ticket-{inter.author.name}",
@@ -74,7 +75,6 @@ class tickets(commands.Cog):
                 embed.set_thumbnail(url=inter.author.avatar.url)
                 await inter.response.send_message(embed=embed, ephemeral=True)
 
-            # If the user selects close, it will close the ticket
             elif action == "close":
                 channel = disnake.utils.get(
                     inter.guild.channels, name=f"ticket-{inter.author.name}")
@@ -83,8 +83,7 @@ class tickets(commands.Cog):
                     await inter.response.send_message("Your ticket has been closed.")
                 else:
                     await inter.response.send_message("You don't have a ticket open.")
-            
-            # If the user selects add, it will add a user to the ticket Ex: /ticket action:add user:Person0z
+
             elif action == "add":
                 channel = disnake.utils.get(
                     inter.guild.channels, name=f"ticket-{inter.author.name}")
@@ -94,13 +93,6 @@ class tickets(commands.Cog):
                 else:
                     await inter.response.send_message("You don't have a ticket open.")
 
-            # If the user selects add, it will add a user to the ticket Ex: /ticket action:add user:Person0z
-            elif action == "add":
-                if inter.channel.name.startswith("ticket-"):
-                    await inter.channel.set_permissions(user, send_messages=True, read_messages=True)
-                    await inter.response.send_message(f"{user.mention} has been added to the ticket.")
-                else:
-                    await inter.response.send_message("You don't have a ticket open.")
             elif action == "remove":
                 if inter.channel.name.startswith("ticket-"):
                     await inter.channel.set_permissions(user, send_messages=False, read_messages=False)

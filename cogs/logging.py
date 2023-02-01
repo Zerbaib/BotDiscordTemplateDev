@@ -20,7 +20,7 @@ class logging(commands.Cog):
         
     @commands.Cog.listener()
     async def on_ready(self):
-        print(f'Loaded Cog Logging')
+        print('Loaded Cog Logging')
             
     # Message deleted, logs messages and pulls
     @commands.Cog.listener()
