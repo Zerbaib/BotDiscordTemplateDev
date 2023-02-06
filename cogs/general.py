@@ -23,14 +23,18 @@ class general(commands.Cog):
         
     @commands.Cog.listener()
     async def on_ready(self):
-        print(f'Loaded Cog General')
+        print('Loaded Cog General')
 
     # Ping Command
     @commands.slash_command(name='ping',
                             description='Get the bot\'s latency',)
     async def ping(self, inter: disnake.ApplicationCommandInteraction):
         try:
-            embed = disnake.Embed(title=f"Pong!", description=f"The ping is around `{round(self.bot.latency * 1000)}ms`", color=config.Success())
+            embed = disnake.Embed(
+                title="Pong!",
+                description=f"The ping is around `{round(self.bot.latency * 1000)}ms`",
+                color=config.Success(),
+            )
             embed.set_footer(text=f'Command executed by {inter.author}', icon_url=inter.author.avatar.url)
             await inter.response.send_message(ephemeral=True, embed=embed)
         except Exception as e:
@@ -41,7 +45,11 @@ class general(commands.Cog):
     @commands.slash_command(name="check", description="Check if the bot is online!")
     async def check(inter):
         try:
-            embed = disnake.Embed(title=f"Bot Status", description=f"Bot is online!", color=config.Success())
+            embed = disnake.Embed(
+                title="Bot Status",
+                description="Bot is online!",
+                color=config.Success(),
+            )
             embed.set_footer(text=f'Requested by {inter.author}', icon_url=inter.author.avatar.url)
             await inter.send(ephemeral=True, embed=embed)
         except Exception as e:
@@ -54,8 +62,9 @@ class general(commands.Cog):
     async def on_member_join(self, member):
         try:
             channel = self.bot.get_channel(config.welcome_channel)
-            role = disnake.utils.get(member.guild.roles, name=config.join_role)
-            if role:
+            if role := disnake.utils.get(
+                member.guild.roles, name=config.join_role
+            ):
                 try:
                     await member.add_roles(role)
                 except Exception as e:
