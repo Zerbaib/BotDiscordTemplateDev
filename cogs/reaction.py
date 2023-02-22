@@ -19,7 +19,8 @@ class reaction(commands.Cog):
             disnake.PartialEmoji(name="📢"): config.annoncement,  
             disnake.PartialEmoji(name="⬆️"): config.patchNote,
             disnake.PartialEmoji(name="📻"): config.inactiveChat,
-            disnake.PartialEmoji(name="🎉"): config.givewayReact, 
+            disnake.PartialEmoji(name="🎉"): config.givewayReact,
+            disnake.PartialEmoji(name="📱"): config.notifReact,
         }
 
 

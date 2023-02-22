@@ -30,6 +30,7 @@ givewayReact = 0000000000000000000
 inactiveChat = 0000000000000000000
 patchNote = 0000000000000000000
 annoncement = 0000000000000000000
+notifReact = 0000000000000000000
 
 # Colors
 Success = disnake.Color.green
