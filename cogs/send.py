@@ -26,8 +26,12 @@ class send(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         try:
-            channel = self.bot.get_channel(config.send_channel) 
-            await channel.send(f"{member.mention}", delete_after=0.2)
+            channel1 = self.bot.get_channel(config.send1_channel)
+            channel2 = self.bot.get_channel(config.send2_channel)
+            channel3 = self.bot.get_channel(config.send3_channel)
+            await channel1.send(f"{member.mention}", delete_after=0.2)
+            await channel2.send(f"{member.mention}", delete_after=0.2)
+            await channel2.send(f"{member.mention}", delete_after=0.2)
         except Exception as e:
             print(f'Error sending welcome message: {e}')
 

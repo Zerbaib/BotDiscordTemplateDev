@@ -43,7 +43,9 @@ owner_ids = [000000000000000, 000000000000000] # You can add more owner ids by a
 # Welcomes & Goodbyes Channel ID
 join_channel = 00000000000000000
 leave_channel = 0000000000000000
-send_channel = 00000000000000000
+send1_channel = 00000000000000000
+send2_channel = 00000000000000000
+send3_channel = 00000000000000000
 join_role = 'Member' # The role you want to give to new members
 
 # Logging Channel ID
