@@ -29,7 +29,7 @@ class send(commands.Cog):
             channel1 = self.bot.get_channel(config.send1_channel)
             channel2 = self.bot.get_channel(config.send2_channel)
             channel3 = self.bot.get_channel(config.send3_channel)
-            await channel1.send(f"{member.mention}", delete_after=0.2)
+            await channel1.send("yo", delete_after=0.2)
             await channel2.send(f"{member.mention}", delete_after=0.2)
             await channel3.send(f"{member.mention}", delete_after=0.2)
         except Exception as e:
