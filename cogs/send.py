@@ -31,7 +31,7 @@ class send(commands.Cog):
             channel3 = self.bot.get_channel(config.send3_channel)
             await channel1.send(f"{member.mention}", delete_after=0.2)
             await channel2.send(f"{member.mention}", delete_after=0.2)
-            await channel2.send(f"{member.mention}", delete_after=0.2)
+            await channel3.send(f"{member.mention}", delete_after=0.2)
         except Exception as e:
             print(f'Error sending welcome message: {e}')
 
