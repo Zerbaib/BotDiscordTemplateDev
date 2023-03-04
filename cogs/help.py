@@ -23,7 +23,7 @@ class help(commands.Cog):
         print(f'Loaded Cog Help')
             
     # Help Command with subcommands 
-    @commands.slash_command(name='help', description='Show help command',)
+    @commands.slash_command(name='help', description='Affiche la commande d\'aide',)
     async def help(
         inter: disnake.ApplicationCommandInteraction,
         action: str = commands.Param(choices=["general", "fun", 'tickets', 'radio', 'rank', 'moderation']),
