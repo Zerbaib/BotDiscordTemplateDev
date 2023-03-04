@@ -89,17 +89,17 @@ class help(commands.Cog):
                 await inter.response.send_message(embed=embedVar)
             if action == "tickets":
                 embedVar = disnake.Embed(
-                    title="Ticket Commands!",
+                    title="Commandes de ticket!",
                     description="Check important commands, that you can use!",
                     colour=config.Success())
                 embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
-                embedVar.add_field(name="Ticket Commands",
+                embedVar.add_field(name="Commandes de ticket",
                                     value=
-                                    "```/ticket - Create a Ticket```" +
-                                    "```/close - Close a Ticket```" +
-                                    "```/add - Add a user to a ticket```" +
-                                    "```/remove - Remove a user from the ticket```" +
-                                    "```/list - List Pople and roles in a ticket```",
+                                    "```/ticket - créer un ticket```" +
+                                    "```/close - Fermer un billet```" +
+                                    "```/add - Ajouter un utilisateur à un ticket```" +
+                                    "```/remove - Supprimer un utilisateur du ticket```" +
+                                    "```/list - Liste les utilisateur et rôles dans un ticket```",
                                     inline=False)
                 embedVar.set_thumbnail(
                     url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
