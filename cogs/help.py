@@ -90,7 +90,7 @@ class help(commands.Cog):
             if action == "tickets":
                 embedVar = disnake.Embed(
                     title="Commandes de ticket!",
-                    description="Check important commands, that you can use!",
+                    description="Vérifier les commandes importantes, que vous pouvez utiliser !",
                     colour=config.Success())
                 embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
                 embedVar.add_field(name="Commandes de ticket",
@@ -107,14 +107,14 @@ class help(commands.Cog):
                 await inter.response.send_message(embed=embedVar)
             if action == "radio":
                 embedVar = disnake.Embed(
-                    title="Radio Commands!",
-                    description="Check important commands, that you can use!",
+                    title="Commandes radio !",
+                    description="Vérifier les commandes importantes, que vous pouvez utiliser !",
                     colour=config.Success())
                 embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
-                embedVar.add_field(name="Radio Commands",
+                embedVar.add_field(name="Commandes radio",
                                     value=
-                                    "```/radio - Start a radio station```" +
-                                    "```/disconnect - Stop a radio station```",
+                                    "```/radio - Démarrer une station de radio```" +
+                                    "```/disconnect - Arrêter une station de radio```",
                                     inline=False)
                 embedVar.set_thumbnail(
                     url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
