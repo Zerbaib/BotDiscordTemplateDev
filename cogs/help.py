@@ -31,18 +31,18 @@ class help(commands.Cog):
         try:
             if action == "general":
                 embedVar = disnake.Embed(
-                    title="General Commands!",
-                    description="Check important commands, that you can use!",
+                    title="Commande général !",
+                    description="Vérifiez les commandes importantes, que vous pouvez utiliser !",
                     colour=config.Success())
                 embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
-                embedVar.add_field(name="Moderation Commands",
+                embedVar.add_field(name="Commande général",
                                     value=
-                                        "```/ping - See the ping of the bot```" +
-                                        "```/check - Check if the bot is online```" +
-                                        "```/userinfo - Look info about user```" +
-                                        "```/serverinfo - Get info about the server```" +
-                                        "```/botinfo - Get info about the bot```" +
-                                        "```/invite - Get the link of the bot```",
+                                        "```/ping - Voir le ping du bot```" +
+                                        "```/check - Vérifier si le robot est en ligne```" +
+                                        "```/userinfo - Rechercher des informations sur l’utilisateur```" +
+                                        "```/serverinfo - Obtenir des informations sur le serveur```" +
+                                        "```/botinfo - Obtenir des renseignements sur le robot```" +
+                                        "```/invite - Obtenir le lien du bot```",
                                         inline=False)
                 embedVar.set_thumbnail(
                     url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
