@@ -122,18 +122,18 @@ class help(commands.Cog):
                 await inter.response.send_message(embed=embedVar)
             if action == "rank":
                 embedVar = disnake.Embed(
-                    title="Level Commands!",
-                    description="Check important commands, that you can use!",
+                    title="Commands de niveau !",
+                    description="Vérifier les commandes importantes, que vous pouvez utiliser !",
                     colour=config.Success())
                 embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
-                embedVar.add_field(name="Level Commands",
+                embedVar.add_field(name="Commands de niveau",
                                     value=
-                                    "```/rank - See your info```" +
-                                    "```/leaderboard - See the member top with bigger levels```" +
-                                    "```/addlevel - Add level to a member```" +
-                                    "```/removelevels - Remove levels to a member```" +
-                                    "```/addxp - Add xp to a member```" +
-                                    "```/remove_xp - Remove xp to a member```",
+                                    "```/rank - Voir vos informations```" +
+                                    "```/leaderboard - Voir le top 10 des niveaux plus élevés```" +
+                                    "```/addlevel - Ajouter des niveaux à un membre```" +
+                                    "```/removelevels - Supprimer des niveaux d’un membre```" +
+                                    "```/addxp - Ajouter de l'xp à un membre```" +
+                                    "```/remove_xp - Supprimer de l'xp à un membre```",
                                     inline=False)
                 embedVar.set_thumbnail(
                     url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
