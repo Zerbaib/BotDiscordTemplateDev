@@ -71,17 +71,17 @@ class help(commands.Cog):
                 await inter.response.send_message(embed=embedVar)
             if action == "fun":
                 embedVar = disnake.Embed(
-                    title="Fun Commands!",
-                    description="Check important commands, that you can use!",
+                    title="Commandes de fun !",
+                    description="Vérifier les commandes importantes, que vous pouvez utiliser !",
                     colour=config.Success())
                 embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
-                embedVar.add_field(name="Fun Commands",
+                embedVar.add_field(name="Commandes de fun",
                                     value=
-                                    "```/dice - Role a dice, get a number from 1-6```" +
-                                    "```/8ball - Ask a question, get an \"Honest\" response```" +
-                                    "```/coinflip - Flip a coin, see what side it lands on!```" +
-                                    "```/generate - Generate an image from a text!```" +
-                                    "```/bitcoin - Check the current price of BitCoin```",
+                                    "```/dice - Jouer un dé, pour obtenir un nombre de 1-6```" +
+                                    "```/8ball - Poser une question, pour obtenir une réponse \"honnête\"```" +
+                                    "```/coinflip - Tirez à pile ou face !```" +
+                                    "```/generate - Générer une image à partir d’un texte !```" +
+                                    "```/bitcoin - Vérifier le prix actuel de BitCoin```",
                                     inline=False)
                 embedVar.set_thumbnail(
                     url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
