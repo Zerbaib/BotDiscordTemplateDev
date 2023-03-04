@@ -31,7 +31,7 @@ class help(commands.Cog):
         try:
             if action == "general":
                 embedVar = disnake.Embed(
-                    title="Commande général !",
+                    title="Commandes général !",
                     description="Vérifiez les commandes importantes, que vous pouvez utiliser !",
                     colour=config.Success())
                 embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
@@ -50,20 +50,20 @@ class help(commands.Cog):
                 await inter.response.send_message(embed=embedVar)
             if action == "moderation":
                 embedVar = disnake.Embed(
-                    title="Moderation Commands!",
-                    description="Check important commands, that you can use!",
+                    title="Commandes de modération !",
+                    description="Vérifier les commandes importantes, que vous pouvez utiliser !",
                     colour=config.Success())
                 embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
-                embedVar.add_field(name="Moderation Commands",
+                embedVar.add_field(name="Commandes de modération",
                                     value=
-                                        "```/slowmode - Activate slow mode for a channel```" +
-                                        "```/lock - Lock the channel from any chitter```" +
-                                        "```/unlock - Unlock the channel for people to chitter```" +
-                                        "```/purge - Purge (delete) bulk messages```" +
-                                        "```/kick - Kick someone from the server```" +
-                                        "```/ban - Ban someone from the server```" +
-                                        "```/unban -Unban someone from the server```" +
-                                        "```/nuke - Nuke a channel to brand new```",
+                                        "```/slowmode - Activer le mode lent pour un canal```" +
+                                        "```/lock - Verrouiller le canal de tout envoie de message```" +
+                                        "```/unlock - Déverrouiller le canal de tout envoie de message```" +
+                                        "```/purge - Purger (supprimer) un groupe de message```" +
+                                        "```/kick - Ejecter quelqu’un du serveur```" +
+                                        "```/ban - Bannir quelqu’un du serveur```" +
+                                        "```/unban - Debannir quelqu’un du serveur```" +
+                                        "```/nuke - Nuke un canal pour tout nouveau```",
                                         inline=False)
                 embedVar.set_thumbnail(
                     url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
