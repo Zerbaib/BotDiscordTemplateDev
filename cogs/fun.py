@@ -24,7 +24,7 @@ class fun(commands.Cog):
         print('Loaded Cog Fun')
 
     # Dice Roll Slash Command
-    @commands.slash_command(name="dice", description="Roll a dice!")
+    @commands.slash_command(name="dice", description="Lancez un dé !")
     async def dice(inter):
         try:
             dice = ["assets/dice/1.png", "assets/dice/2.png", "assets/dice/3.png", "assets/dice/4.png", "assets/dice/5.png", "assets/dice/6.png"]    
@@ -37,7 +37,7 @@ class fun(commands.Cog):
             await inter.send(embed=errors.create_error_embed(f"Error sending dice command: {e}"))
 
     # 8 ball command
-    @commands.slash_command(name="8ball", description="Ask the 8ball a question!")
+    @commands.slash_command(name="8ball", description="Posez une question à la 8ball !")
     async def eightball(inter, *, question):
         try:
             responses = ["C'est certain.", "Il en est ainsi.", "sans aucun doute.", "Oui - certainement.", "Vous pouvez vous y fier.", "À mon avis, oui.", "Très probablement.", "Perspectives favorables.", "Oui.", "Les signes indiquent que oui.", "Répondre vague, réessayer.", "Demandez à nouveau plus tard.", "Mieux vaut ne pas te le dire maintenant.", "Je ne peux pas prédire maintenant.", "Concentre-toi et demande encore.", "Ne compte pas dessus.", "Ma réponse est non.", "Mes sources disent non.", "Les perspectives ne sont pas si bonnes.", "Très douteux."]
@@ -49,7 +49,7 @@ class fun(commands.Cog):
             await inter.send(embed=errors.create_error_embed(f"Error sending 8 Ball command: {e}"))
         
     # Coinflip Slash Command
-    @commands.slash_command(name="coinflip", description="Flip a coin!")
+    @commands.slash_command(name="coinflip", description="Tirez à pile ou face!")
     async def coinflip(inter):
         try:
             coin = ["face", "pile"]
@@ -59,10 +59,7 @@ class fun(commands.Cog):
         except Exception as e:
             print(f'Error sending coinflip message: {e}')
 
-    @commands.slash_command(
-        name="randomfact",
-        description="Get a random fact."
-    )
+    @commands.slash_command(name="randomfact", description="Obtenez un fait aléatoire.")
     async def randomfact(self, inter):
         try:
             async with aiohttp.ClientSession() as session:
