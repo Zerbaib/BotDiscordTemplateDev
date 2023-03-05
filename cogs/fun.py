@@ -28,9 +28,9 @@ class fun(commands.Cog):
     async def dice(inter):
         try:
             dice = ["assets/dice/1.png", "assets/dice/2.png", "assets/dice/3.png", "assets/dice/4.png", "assets/dice/5.png", "assets/dice/6.png"]    
-            embed = disnake.Embed(title=f"You Rolled A Dice!", color=disnake.Color.random())
+            embed = disnake.Embed(title=f"Le dé est lancer !", color=disnake.Color.random())
             embed.set_image(file=disnake.File(random.choice(dice)))
-            embed.set_footer(text=f'Requested by {inter.author}', icon_url=inter.author.avatar.url)
+            embed.set_footer(text=f'Demander par: {inter.author}', icon_url=inter.author.avatar.url)
             msg = await inter.send(embed=embed)
         except Exception as e:
             print(f'Error sending dice message: {e}')
