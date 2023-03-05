@@ -79,8 +79,8 @@ class Rank(commands.Cog):
 
         if xp >= xp_required:
             self.data[guild_id][user_id]["level"] = lvl + 1
-            embed = disnake.Embed(title=f"{message.author.name} Just Leveled Up!",
-                                  description=f"Congrats {message.author.mention}! You have leveled up to level {lvl + 1}!",
+            embed = disnake.Embed(title=f"{message.author.name} Vien juste de gagner **1** niveau !",
+                                  description=f"Bravo {message.author.mention} ! Tu viens d'arriver au niveau {lvl + 1}!",
                                   color=config.Success())
             await message.channel.send(embed=embed, delete_after=10)
             self.save_data()
@@ -93,14 +93,14 @@ class Rank(commands.Cog):
             embed = disnake.Embed(title=f"{inter.author.name}'s Rank", description="You haven't started leveling yet. Send your first message(s) to get your levels up!", color=config.Error())
             await inter.send(embed=embed)
         elif user_id not in self.data[guild_id]:
-            embed = disnake.Embed(title=f"{inter.author.name}'s Rank", description="You haven't started leveling yet. Send your first message(s) to get your levels up!", color=config.Error())
+            embed = disnake.Embed(title=f"Rank de {inter.author.name}", description="Tu n'a pas encore commencer a parler. Envoie tes premier message pour commencer a levelup", color=config.Error())
             await inter.send(embed=embed)
         else:
             current_xp = self.data[guild_id][user_id]["xp"]
             current_lvl = self.data[guild_id][user_id]["level"]
             xp_required = 5 * (current_lvl**2) + 10 * current_lvl + 10
             remaining_xp = xp_required - current_xp
-            embed = disnake.Embed(title=f"{inter.author.name}'s Rank", description=f"```Level: {current_lvl} | XP: {current_xp}/{xp_required}``` You need {remaining_xp} XP to level up!", color=config.Success())
+            embed = disnake.Embed(title=f"Rank de {inter.author.name}", description=f"```Niveau: {current_lvl} | XP: {current_xp}/{xp_required}``` Il te faut {remaining_xp} XP pour levelup !", color=config.Success())
             await inter.send(embed=embed)
 
     @commands.slash_command()
