@@ -40,9 +40,9 @@ class fun(commands.Cog):
     @commands.slash_command(name="8ball", description="Ask the 8ball a question!")
     async def eightball(inter, *, question):
         try:
-            responses = ["It is certain.", "It is decidedly so.", "Without a doubt.", "Yes - definitely.", "You may rely on it.", "As I see it, yes.", "Most likely.", "Outlook good.", "Yes.", "Signs point to yes.", "Reply hazy, try again.", "Ask again later.", "Better not tell you now.", "Cannot predict now.", "Concentrate and ask again.", "Don't count on it.", "My reply is no.", "My sources say no.", "Outlook not so good.", "Very doubtful."]
+            responses = ["C'est certain.", "Il en est ainsi.", "sans aucun doute.", "Oui - certainement.", "Vous pouvez vous y fier.", "À mon avis, oui.", "Très probablement.", "Perspectives favorables.", "Oui.", "Les signes indiquent que oui.", "Répondre vague, réessayer.", "Demandez à nouveau plus tard.", "Mieux vaut ne pas te le dire maintenant.", "Je ne peux pas prédire maintenant.", "Concentre-toi et demande encore.", "Ne compte pas dessus.", "Ma réponse est non.", "Mes sources disent non.", "Les perspectives ne sont pas si bonnes.", "Très douteux."]
             embed = disnake.Embed(title=f"8ball", description=f"Question: {question}\nAnswer: {random.choice(responses)}", color=disnake.Color.random())
-            embed.set_footer(text=f'Requested by {inter.author}', icon_url=inter.author.avatar.url)
+            embed.set_footer(text=f'Demander par {inter.author}', icon_url=inter.author.avatar.url)
             await inter.send(embed=embed)
         except Exception as e:
             print(f'Error sending 8ball message: {e}')
@@ -52,9 +52,9 @@ class fun(commands.Cog):
     @commands.slash_command(name="coinflip", description="Flip a coin!")
     async def coinflip(inter):
         try:
-            coin = ["heads", "tails"]
-            embed = disnake.Embed(title=f"You Flipped A Coin!", description=f"You Flipped {random.choice(coin)}", color=disnake.Color.random())
-            embed.set_footer(text=f'Requested by {inter.author}', icon_url=inter.author.avatar.url)
+            coin = ["face", "pile"]
+            embed = disnake.Embed(title=f"Tu fait tourner la piece !", description=f"Le resultat est {random.choice(coin)}", color=disnake.Color.random())
+            embed.set_footer(text=f'Demander par {inter.author}', icon_url=inter.author.avatar.url)
             await inter.send(embed=embed)
         except Exception as e:
             print(f'Error sending coinflip message: {e}')
@@ -69,8 +69,8 @@ class fun(commands.Cog):
                 async with session.get("https://uselessfacts.jsph.pl/random.json?language=en") as request:
                     if request.status == 200:
                         data = await request.json()
-                        embed = disnake.Embed(title=f"Random Fact!", description=data["text"], color=0xD75BF4)
-                        embed.set_footer(text=f'Requested by {inter.author}', icon_url=inter.author.avatar.url)
+                        embed = disnake.Embed(title=f"Fait aléatoire", description=data["text"], color=0xD75BF4)
+                        embed.set_footer(text=f'Demander par {inter.author}', icon_url=inter.author.avatar.url)
                     else:
                         embed = disnake.Embed(
                             title="Error!",
