@@ -39,7 +39,7 @@ class Apis(commands.Cog):
                             "assets/loading/loading3.gif", 
                             "assets/loading/loading4.gif",
                             "assets/loading/loading5.gif"]
-            embed = disnake.Embed(title=f"Loading...! Generating image... ETA: <t:{ETA}:R>", color=disnake.Color.random())
+            embed = disnake.Embed(title=f"Chargement...! En train de crée l'image... Encore: <t:{ETA}:R>", color=disnake.Color.random())
             embed.set_image(file=disnake.File(random.choice(loading_images)))
             await inter.send(embed=embed)
             async with aiohttp.request("POST", "https://backend.craiyon.com/generate", json={"prompt": prompt}) as resp:
@@ -48,7 +48,7 @@ class Apis(commands.Cog):
                 data = await resp.json()
                 img = Image.open(BytesIO(base64.b64decode(data["images"][0])))
                 img.save("image.png")
-                embed = disnake.Embed(title=f"The image you wanted generated: {prompt}", color=disnake.Color.random())
+                embed = disnake.Embed(title=f"Voila ton resultat: {prompt}", color=disnake.Color.random())
                 embed.set_image(file=disnake.File('image.png'))
                 await inter.edit_original_response(content=None, embed=embed)
                 os.remove("image.png")
