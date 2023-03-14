@@ -103,7 +103,7 @@ class Rank(commands.Cog):
                 current_lvl = self.data[guild_id][user_id]["level"]
                 xp_required = 5 * (current_lvl**2) + 10 * current_lvl + 10
                 remaining_xp = xp_required - current_xp
-                embed = disnake.Embed(title=f"{user}'s Rank", description=f"```Level: {current_lvl} | XP: {current_xp}/{xp_required}``` You need {remaining_xp} XP to level up!", color=config.Success())
+                embed = disnake.Embed(title=f"Rank de {user}", description=f"```Niveau: {current_lvl} | XP: {current_xp}/{xp_required}``` Il te vaut {remaining_xp} XP pour levelup !", color=config.Success())
                 await inter.send(embed=embed)
         except Exception as e:
             print(f"Error sending rank command: {e}")
