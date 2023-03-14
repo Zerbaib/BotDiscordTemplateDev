@@ -86,22 +86,28 @@ class Rank(commands.Cog):
             self.save_data()
     
     @commands.slash_command()
-    async def rank(self, inter: disnake.ApplicationCommandInteraction):
-        guild_id = str(inter.guild.id)
-        user_id = str(inter.author.id)
-        if guild_id not in self.data:
-            embed = disnake.Embed(title=f"{inter.author.name}'s Rank", description="You haven't started leveling yet. Send your first message(s) to get your levels up!", color=config.Error())
-            await inter.send(embed=embed)
-        elif user_id not in self.data[guild_id]:
-            embed = disnake.Embed(title=f"Rank de {inter.author.name}", description="Tu n'a pas encore commencer a parler. Envoie tes premier message pour commencer a levelup", color=config.Error())
-            await inter.send(embed=embed)
-        else:
-            current_xp = self.data[guild_id][user_id]["xp"]
-            current_lvl = self.data[guild_id][user_id]["level"]
-            xp_required = 5 * (current_lvl**2) + 10 * current_lvl + 10
-            remaining_xp = xp_required - current_xp
-            embed = disnake.Embed(title=f"Rank de {inter.author.name}", description=f"```Niveau: {current_lvl} | XP: {current_xp}/{xp_required}``` Il te faut {remaining_xp} XP pour levelup !", color=config.Success())
-            await inter.send(embed=embed)
+    async def rank(self, inter: disnake.ApplicationCommandInteraction, user: disnake.Member = None):
+        try:
+            if user is None:
+                user = inter.author
+            guild_id = str(inter.guild.id)
+            user_id = str(user.id)
+            if guild_id not in self.data:
+                embed = disnake.Embed(title=f"{user}'s Rank", description="You haven't started leveling yet. Send your first message(s) to get your levels up!", color=config.Error())
+                await inter.send(embed=embed)
+            elif user_id not in self.data[guild_id]:
+                embed = disnake.Embed(title=f"{user}'s Rank", description="You haven't started leveling yet. Send your first message(s) to get your levels up!", color=config.Error())
+                await inter.send(embed=embed)
+            else:
+                current_xp = self.data[guild_id][user_id]["xp"]
+                current_lvl = self.data[guild_id][user_id]["level"]
+                xp_required = 5 * (current_lvl**2) + 10 * current_lvl + 10
+                remaining_xp = xp_required - current_xp
+                embed = disnake.Embed(title=f"{user}'s Rank", description=f"```Level: {current_lvl} | XP: {current_xp}/{xp_required}``` You need {remaining_xp} XP to level up!", color=config.Success())
+                await inter.send(embed=embed)
+        except Exception as e:
+            print(f"Error sending rank command: {e}")
+            await inter.channel.send(f"Error sending rank command: {e}")
 
     @commands.slash_command()
     async def leaderboard(self, inter: disnake.ApplicationCommandInteraction):
