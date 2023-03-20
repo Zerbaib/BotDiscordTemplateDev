@@ -26,7 +26,7 @@ class Apis(commands.Cog):
         
     @commands.Cog.listener()
     async def on_ready(self):
-        print(f'Loaded Cog API')
+        print('Loaded Cog API')
 
     # Image Genertor
     @commands.slash_command(name="generate", description="Generate an image from a prompt!")
@@ -63,7 +63,11 @@ class Apis(commands.Cog):
             async with aiohttp.request("GET", url) as response:
                 text = await response.text()
                 value = json.loads(text)["bpi"]["USD"]["rate"]
-                embed = disnake.Embed(title=f"Bitcoin Price", description=f"Current bitcoin price: ${value}", color=disnake.Color.random())
+                embed = disnake.Embed(
+                    title="Bitcoin Price",
+                    description=f"Current bitcoin price: ${value}",
+                    color=disnake.Color.random(),
+                )
                 embed.set_footer(text=f'Requested by {inter.author}', icon_url=inter.author.avatar.url)
                 await inter.send(embed=embed)
         except Exception as e:
@@ -104,31 +108,45 @@ class Apis(commands.Cog):
         if message.author.bot:
             return
         if len(message.attachments) > 0:
-            if message.attachments[0].url.endswith(('.txt', '.js', '.py', '.c', '.cpp', '.java', '.html', '.css', '.scss')) == True:
-                download = message.attachments[0].url
-                async with aiohttp.ClientSession() as session:
-                    async with session.get(download, allow_redirects=True) as r:
-                        text = await r.text()
-                        text = "\n".join(text.splitlines())
-                        truncated = False
-                        if len(text) > 100000:
-                            text = text[:99999]
-                            truncated = True
-                        req = requests.post('https://paste.zluqe.com/documents', data=text)
-                        key = json.loads(req.content)['key']
-                        response = ""
-                        response = response + "https://paste.zluqe.com/" + key
-                        response = response + "\nRequested by " + message.author.mention
-                        if truncated:
-                            response = response + "\n(file was truncated because it was too long.)"
-                        embed = disnake.Embed(title="Please Use The Zluqe Paste Service", color=0x1D83D4)
-                        embed.add_field(name='Paste URL', value=f'> [File Paste Link](https://paste.zluqe.com/{key})')
-                        embed.add_field(name='File Extension', value='> '+ download.split('.')[-1])
-                        embed.add_field(name='File Size', value='> '+ str(round(len(text)/1000)) + ' KB')
-                        embed.set_footer(text=f'Requested by {message.author}', icon_url=message.author.avatar.url)
-                        await message.reply(embed=embed)
-            else:
+            if (
+                message.attachments[0].url.endswith(
+                    (
+                        '.txt',
+                        '.js',
+                        '.py',
+                        '.c',
+                        '.cpp',
+                        '.java',
+                        '.html',
+                        '.css',
+                        '.scss',
+                    )
+                )
+                != True
+            ):
                 return
+            download = message.attachments[0].url
+            async with aiohttp.ClientSession() as session:
+                async with session.get(download, allow_redirects=True) as r:
+                    text = await r.text()
+                    text = "\n".join(text.splitlines())
+                    truncated = False
+                    if len(text) > 100000:
+                        text = text[:99999]
+                        truncated = True
+                    req = requests.post('https://paste.zluqe.com/documents', data=text)
+                    key = json.loads(req.content)['key']
+                    response = ""
+                    response = f"{response}https://paste.zluqe.com/{key}"
+                    response = response + "\nRequested by " + message.author.mention
+                    if truncated:
+                        response += "\n(file was truncated because it was too long.)"
+                    embed = disnake.Embed(title="Please Use The Zluqe Paste Service", color=0x1D83D4)
+                    embed.add_field(name='Paste URL', value=f'> [File Paste Link](https://paste.zluqe.com/{key})')
+                    embed.add_field(name='File Extension', value='> '+ download.split('.')[-1])
+                    embed.add_field(name='File Size', value=f'> {str(round(len(text) / 1000))} KB')
+                    embed.set_footer(text=f'Requested by {message.author}', icon_url=message.author.avatar.url)
+                    await message.reply(embed=embed)
 
 def setup(bot):
     bot.add_cog(Apis(bot))

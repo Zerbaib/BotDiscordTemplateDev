@@ -27,8 +27,8 @@ class fun(commands.Cog):
     @commands.slash_command(name="dice", description="Lancez un dé !")
     async def dice(inter):
         try:
-            dice = ["assets/dice/1.png", "assets/dice/2.png", "assets/dice/3.png", "assets/dice/4.png", "assets/dice/5.png", "assets/dice/6.png"]    
-            embed = disnake.Embed(title=f"Le dé est lancer !", color=disnake.Color.random())
+            dice = ["assets/dice/1.png", "assets/dice/2.png", "assets/dice/3.png", "assets/dice/4.png", "assets/dice/5.png", "assets/dice/6.png"]
+            embed = disnake.Embed(title="Le dé est lancer !", color=disnake.Color.random())
             embed.set_image(file=disnake.File(random.choice(dice)))
             embed.set_footer(text=f'Demander par: {inter.author}', icon_url=inter.author.avatar.url)
             msg = await inter.send(embed=embed)
@@ -41,7 +41,11 @@ class fun(commands.Cog):
     async def eightball(inter, *, question):
         try:
             responses = ["C'est certain.", "Il en est ainsi.", "sans aucun doute.", "Oui - certainement.", "Vous pouvez vous y fier.", "À mon avis, oui.", "Très probablement.", "Perspectives favorables.", "Oui.", "Les signes indiquent que oui.", "Répondre vague, réessayer.", "Demandez à nouveau plus tard.", "Mieux vaut ne pas te le dire maintenant.", "Je ne peux pas prédire maintenant.", "Concentre-toi et demande encore.", "Ne compte pas dessus.", "Ma réponse est non.", "Mes sources disent non.", "Les perspectives ne sont pas si bonnes.", "Très douteux."]
-            embed = disnake.Embed(title=f"8ball", description=f"Question: {question}\nAnswer: {random.choice(responses)}", color=disnake.Color.random())
+            embed = disnake.Embed(
+                title="8ball",
+                description=f"Question: {question}\nAnswer: {random.choice(responses)}",
+                color=disnake.Color.random(),
+            )
             embed.set_footer(text=f'Demander par {inter.author}', icon_url=inter.author.avatar.url)
             await inter.send(embed=embed)
         except Exception as e:
@@ -53,7 +57,11 @@ class fun(commands.Cog):
     async def coinflip(inter):
         try:
             coin = ["face", "pile"]
-            embed = disnake.Embed(title=f"Tu fait tourner la piece !", description=f"Le resultat est {random.choice(coin)}", color=disnake.Color.random())
+            embed = disnake.Embed(
+                title="Tu fait tourner la piece !",
+                description=f"Le resultat est {random.choice(coin)}",
+                color=disnake.Color.random(),
+            )
             embed.set_footer(text=f'Demander par {inter.author}', icon_url=inter.author.avatar.url)
             await inter.send(embed=embed)
         except Exception as e:
@@ -66,7 +74,11 @@ class fun(commands.Cog):
                 async with session.get("https://uselessfacts.jsph.pl/random.json?language=en") as request:
                     if request.status == 200:
                         data = await request.json()
-                        embed = disnake.Embed(title=f"Fait aléatoire", description=data["text"], color=0xD75BF4)
+                        embed = disnake.Embed(
+                            title="Fait aléatoire",
+                            description=data["text"],
+                            color=0xD75BF4,
+                        )
                         embed.set_footer(text=f'Demander par {inter.author}', icon_url=inter.author.avatar.url)
                     else:
                         embed = disnake.Embed(

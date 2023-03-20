@@ -20,7 +20,7 @@ class help(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print(f'Loaded Cog Help')
+        print('Loaded Cog Help')
             
     # Help Command with subcommands 
     @commands.slash_command(name='help', description='Affiche la commande d\'aide',)
@@ -29,7 +29,25 @@ class help(commands.Cog):
         action: str = commands.Param(choices=["general", "fun", 'tickets', 'radio', 'rank', 'moderation']),
     ):
         try:
-            if action == "general":
+            if action == "fun":
+                embedVar = disnake.Embed(
+                    title="Commandes de fun !",
+                    description="Vérifier les commandes importantes, que vous pouvez utiliser !",
+                    colour=config.Success())
+                embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
+                embedVar.add_field(name="Commandes de fun",
+                                    value=
+                                    "```/dice - Jouer un dé, pour obtenir un nombre de 1-6```" +
+                                    "```/8ball - Poser une question, pour obtenir une réponse \"honnête\"```" +
+                                    "```/coinflip - Tirez à pile ou face !```" +
+                                    "```/generate - Générer une image à partir d’un texte !```" +
+                                    "```/bitcoin - Vérifier le prix actuel de BitCoin```",
+                                    inline=False)
+                embedVar.set_thumbnail(
+                    url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
+                )
+                await inter.response.send_message(embed=embedVar)
+            elif action == "general":
                 embedVar = disnake.Embed(
                     title="Commandes général !",
                     description="Vérifiez les commandes importantes, que vous pouvez utiliser !",
@@ -48,7 +66,7 @@ class help(commands.Cog):
                     url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
                 )
                 await inter.response.send_message(embed=embedVar)
-            if action == "moderation":
+            elif action == "moderation":
                 embedVar = disnake.Embed(
                     title="Commandes de modération !",
                     description="Vérifier les commandes importantes, que vous pouvez utiliser !",
@@ -69,43 +87,7 @@ class help(commands.Cog):
                     url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
                 )
                 await inter.response.send_message(embed=embedVar)
-            if action == "fun":
-                embedVar = disnake.Embed(
-                    title="Commandes de fun !",
-                    description="Vérifier les commandes importantes, que vous pouvez utiliser !",
-                    colour=config.Success())
-                embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
-                embedVar.add_field(name="Commandes de fun",
-                                    value=
-                                    "```/dice - Jouer un dé, pour obtenir un nombre de 1-6```" +
-                                    "```/8ball - Poser une question, pour obtenir une réponse \"honnête\"```" +
-                                    "```/coinflip - Tirez à pile ou face !```" +
-                                    "```/generate - Générer une image à partir d’un texte !```" +
-                                    "```/bitcoin - Vérifier le prix actuel de BitCoin```",
-                                    inline=False)
-                embedVar.set_thumbnail(
-                    url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
-                )
-                await inter.response.send_message(embed=embedVar)
-            if action == "tickets":
-                embedVar = disnake.Embed(
-                    title="Commandes de ticket!",
-                    description="Vérifier les commandes importantes, que vous pouvez utiliser !",
-                    colour=config.Success())
-                embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
-                embedVar.add_field(name="Commandes de ticket",
-                                    value=
-                                    "```/ticket - créer un ticket```" +
-                                    "```/close - Fermer un billet```" +
-                                    "```/add - Ajouter un utilisateur à un ticket```" +
-                                    "```/remove - Supprimer un utilisateur du ticket```" +
-                                    "```/list - Liste les utilisateur et rôles dans un ticket```",
-                                    inline=False)
-                embedVar.set_thumbnail(
-                    url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
-                )
-                await inter.response.send_message(embed=embedVar)
-            if action == "radio":
+            elif action == "radio":
                 embedVar = disnake.Embed(
                     title="Commandes radio !",
                     description="Vérifier les commandes importantes, que vous pouvez utiliser !",
@@ -120,7 +102,7 @@ class help(commands.Cog):
                     url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
                 )
                 await inter.response.send_message(embed=embedVar)
-            if action == "rank":
+            elif action == "rank":
                 embedVar = disnake.Embed(
                     title="Commands de niveau !",
                     description="Vérifier les commandes importantes, que vous pouvez utiliser !",
@@ -134,6 +116,24 @@ class help(commands.Cog):
                                     "```/removelevels - Supprimer des niveaux d’un membre```" +
                                     "```/addxp - Ajouter de l'xp à un membre```" +
                                     "```/remove_xp - Supprimer de l'xp à un membre```",
+                                    inline=False)
+                embedVar.set_thumbnail(
+                    url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"
+                )
+                await inter.response.send_message(embed=embedVar)
+            elif action == "tickets":
+                embedVar = disnake.Embed(
+                    title="Commandes de ticket!",
+                    description="Vérifier les commandes importantes, que vous pouvez utiliser !",
+                    colour=config.Success())
+                embedVar.add_field(name="Bot Prefix", value="```/ + !```", inline=False)
+                embedVar.add_field(name="Commandes de ticket",
+                                    value=
+                                    "```/ticket - créer un ticket```" +
+                                    "```/close - Fermer un billet```" +
+                                    "```/add - Ajouter un utilisateur à un ticket```" +
+                                    "```/remove - Supprimer un utilisateur du ticket```" +
+                                    "```/list - Liste les utilisateur et rôles dans un ticket```",
                                     inline=False)
                 embedVar.set_thumbnail(
                     url="https://us-east-1.tixte.net/uploads/your-parents.wants.solutions/help.png"

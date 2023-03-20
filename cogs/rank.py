@@ -45,8 +45,7 @@ class Rank(commands.Cog):
             bucket = self._cd_mapping.get_bucket(message)
             self.cooldowns[message.author.id] = bucket
 
-        retry_after = bucket.update_rate_limit()
-        if retry_after:
+        if retry_after := bucket.update_rate_limit():
             return
 
         guild_id = str(message.guild.id)
@@ -60,7 +59,7 @@ class Rank(commands.Cog):
             self.data[guild_id][user_id] = {"level": 0, "xp": 0}
             self.save_data()
 
-        self.data[guild_id][user_id]["xp"] += (random.randint(1, 10) * config.multiplicator) 
+        self.data[guild_id][user_id]["xp"] += (random.randint(1, 10) * config.multiplicator)
         self.save_data()
 
         xp = self.data[guild_id][user_id]["xp"]
@@ -74,8 +73,7 @@ class Rank(commands.Cog):
             # Add role to user if they have reached a certain level
             if lvl + 1 in self.level_roles:
                 role_id = self.level_roles[lvl + 1]
-                role = message.guild.get_role(role_id)
-                if role:
+                if role := message.guild.get_role(role_id):
                     await message.author.add_roles(role)
 
         if xp >= xp_required:
@@ -93,12 +91,8 @@ class Rank(commands.Cog):
                 user = inter.author
             guild_id = str(inter.guild.id)
             user_id = str(user.id)
-            if guild_id not in self.data:
+            if guild_id not in self.data or user_id not in self.data[guild_id]:
                 embed = disnake.Embed(title=f"{user}'s Rank", description="You haven't started leveling yet. Send your first message(s) to get your levels up!", color=config.Error())
-                await inter.send(embed=embed)
-            elif user_id not in self.data[guild_id]:
-                embed = disnake.Embed(title=f"{user}'s Rank", description="You haven't started leveling yet. Send your first message(s) to get your levels up!", color=config.Error())
-                await inter.send(embed=embed)
             else:
                 current_xp = self.data[guild_id][user_id]["xp"]
                 current_lvl = self.data[guild_id][user_id]["level"]
@@ -108,7 +102,7 @@ class Rank(commands.Cog):
                     embed = disnake.Embed(title=f"Rank de {user}", description=f"```Niveau: {current_lvl} | XP: {current_xp}/{xp_required}``` Il lui faut {remaining_xp} XP pour levelup !", color=config.Success())
                 else:
                     embed = disnake.Embed(title=f"Rank de {user}", description=f"```Niveau: {current_lvl} | XP: {current_xp}/{xp_required}``` Il te faut {remaining_xp} XP pour levelup !", color=config.Success())
-                await inter.send(embed=embed)
+            await inter.send(embed=embed)
         except Exception as e:
             print(f"Error sending rank command: {e}")
             await inter.channel.send(f"Error sending rank command: {e}")
